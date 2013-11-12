@@ -14,7 +14,7 @@ If you are the manager, how can you help arrange all the review request and tran
 The reason to use a code review board, is to help your team improve the code review efficient.
 
 ##What is the basic goal of "Code Review Board"?
-> A board that could send reminder when team member sends a review request. It would integrate with the chrome notification function.
-> Display the reviewer and auto switch review item's status.
-> Auto trace the time people spend on a review.
-> Work as a team, allow team member management.
+* A board that could send reminder when team member sends a review request. It would integrate with the chrome notification function.
+* Display the reviewer and auto switch review item's status.
+* Auto trace the time people spend on a review.
+* Work as a team, allow team member management.

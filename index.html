@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html ng-app="codeReviewBoard" xmlns="http://www.w3.org/1999/html">
+<head>
+    <script src="js/angular.js"></script>
+    <script src="https://cdn.firebase.com/v0/firebase.js"></script>
+    <script src="js/angularfire.js"></script>
+    <script src="js/app.js"></script>
+    <link rel="stylesheet" href="css/app.css"/>
+</head>
+<body ng-controller="MainController">
+<div class="wrapper">
+    <h1>Code Review Board</h1>
+    <ul class="board">
+        <li ng-repeat="item in item" class="item">
+            <p class="status {{item.status}}">{{item.status}}</p>
+            <p class="coder">{{item.coderName}}:</p>
+            <p class="description">{{item.description}}</p>
+            <p class="reviewer">{{item.reviewer}}</p>
+            <div class="actions">
+                <a href="">Start Review</a>
+                <a class="delete" href="" ng-click="removeReviewItem()">Delete</a>
+            </div>
+        </li>
+    </ul>
+    <form class="ask-for-review">
+        <div class="group">
+            <label for="coder-name">My name is</label>
+            <input id="coder-name" type="text" ng-model="coderName" placeholder=""/>
+        </div>
+        <div class="group">
+            <label for="description">I need a review about</label>
+            <textarea id="description" ng-model="description" ng-keypress="addReviewItem($event)" placeholder="issue... " /></textarea>
+        </div>
+        <button ng-click="addReviewItemClick()">Pin Request to Board</button>
+    </form>
+</div>
+</body>
+</html>

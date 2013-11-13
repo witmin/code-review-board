@@ -50,7 +50,6 @@ function MainController($scope, angularFire ){
         $scope.toRemove = null;
     };
 
-
 //  Click "Start Review" to add reviewer's name and to change status
     $scope.startReviewClick = function(index){
         ref.index.update({

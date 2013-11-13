@@ -24,28 +24,35 @@ p{
 a, a:focus, a:visited{
   color: #2e41ab;
 }
-label, input, button, textarea, button{
+label, input, textarea{
   display: block;
   margin: 0 0 5px 0
-
 }
 input, button, textarea{
   padding:8px 10px;
   border: 1px solid #dddddd;
   border-radius: 4px;
+  margin: 0 15px 5px 0;
   width: 500px;
 }
-button{
+.btn, .btn:visited, .btn:focus{
   color: #62401b;
   background: #ffd781;
-  width: 520px;
   border:0;
   border-bottom: 2px solid #e8c475;
+  width:auto;
+  text-decoration: none;
+  padding:8px 10px;
+  margin: 0 15px 10px 0;
 }
-button:hover{
+button:hover, .btn:hover{
   color: #3a2610;
   background: #ffde89;
   border-bottom-color: #d2aa73;
+}
+//Buttons
+.primary-btn{
+
 }
 .group{
   margin:0 0 .5em 0;
@@ -65,6 +72,7 @@ button:hover{
     margin:0 10px 10px 0;
     padding: 10px 15px;
     background: #fff9ca;
+    position: relative;
 
     p{
       margin:3px 0 5px 0;
@@ -95,6 +103,39 @@ button:hover{
     }
   }
 }
+//Dialog
+.dialog{
+  z-index: 100;
+  position: absolute;
+  top:140px;
+  left: -10px;
+  border:0;
+  width: 310px;
+  margin:0;
+  background: transparent;
+
+  .container{
+    background: #3691ff;
+    border-top: 3px solid #44a4ff;
+    border-bottom: 3px solid #1f81ff;
+    padding: 0 20px 10px 20px;
+    width:auto;
+    height:auto;
+    color:#ffffff;
+
+    input{
+      width:200px;
+      margin: 0 0 15px 0;
+    }
+    a, a:visited, a:focus{
+      color:#dddddd;
+      :hover{
+        color:#ffffff;
+      }
+    }
+
+  }
+}
 
 //form.submit
 .ask-for-review{
@@ -106,21 +147,4 @@ button:hover{
   margin:1em 0 0 0 ;
   border-top: 1px solid #eeeeee;
   background: #ffffff;
-}
-//Dialog
-.dialog{
-  z-index: 100;
-  position: fixed;
-  top:300px;
-  left: 5%;
-  border:0;
-
-  .container{
-    background: #ffffff;
-    border: 1px solid #cccccc;
-    box-shadow: 0 1px 3px 3px #dddddd;
-    padding: 5px 20px 30px 20px;
-    width:auto;
-    height:auto;
-  }
 }

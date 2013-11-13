@@ -63,7 +63,7 @@ button:hover, .btn:hover {
     min-height: 140px;
     margin: 0 10px 10px 0;
     padding: 10px 15px;
-    background: #fff9ca;
+    background: #eeeeee;
     position: relative; }
     .board li p {
       margin: 3px 0 5px 0; }
@@ -88,7 +88,7 @@ button:hover, .btn:hover {
 .dialog {
   z-index: 100;
   position: absolute;
-  top: 140px;
+  top: 150px;
   left: -10px;
   border: 0;
   width: 310px;

@@ -1,5 +1,5 @@
 @import 'normalize.css';
-@import url(http://fonts.googleapis.com/css?family=Share:400,700);
+@import 'http://fonts.googleapis.com/css?family=Share:400,700';
 
 body{
   font-family: 'Share', cursive;
@@ -49,6 +49,7 @@ button:hover{
 .group{
   margin:0 0 .5em 0;
 }
+
 //Board
 .board{
   height: 300px;
@@ -64,6 +65,8 @@ button:hover{
   padding: 10px 15px;
   background: #fff9ca;
 }
+//Elements that in an item
+//Status
 .status{
   font-size: 0.8em;
   margin:0;
@@ -84,6 +87,7 @@ button:hover{
 }
 .actions{
 }
+
 //form.submit
 .ask-for-review{
   width:80%;

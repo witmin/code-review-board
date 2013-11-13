@@ -1,5 +1,5 @@
 @import url(normalize.css);
-@import url(http://fonts.googleapis.com/css?family=Share:400,700);
+@import 'http://fonts.googleapis.com/css?family=Share:400,700';
 body {
   font-family: 'Share', cursive;
   position: relative;

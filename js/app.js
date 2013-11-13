@@ -22,6 +22,7 @@ function MainController($scope, angularFire ){
             createdTime : $scope.date,
             reviewer: ''
             })
+        notify($scope.coderName, $scope.description);
         $scope.description = '';
     };
     $scope.addReviewItemClick = function(){
@@ -31,6 +32,7 @@ function MainController($scope, angularFire ){
             status: 'waiting',
             reviewer: ''
         })
+        notify($scope.coderName, $scope.description);
         $scope.description = '';
     };
 
@@ -38,4 +40,25 @@ function MainController($scope, angularFire ){
     $scope.removeReviewItem = function(index){
         $scope.item.splice(index, 1);
     };
+}
+
+//Webkit Notificatiion
+function notify(coderName, description) {
+    var havePermission = window.webkitNotifications.checkPermission();
+    if (havePermission == 0) {
+        // 0 is PERMISSION_ALLOWED
+        var notification = window.webkitNotifications.createNotification(
+            'images/notification-new.png',
+            coderName + ' asks for Code Review',
+            'About '+ description
+        );
+
+        notification.onclick = function () {
+            window.open("http://stackoverflow.com/a/13328397/1269037");
+            notification.close();
+        }
+        notification.show();
+    } else {
+        window.webkitNotifications.requestPermission();
+    }
 }

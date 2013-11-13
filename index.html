@@ -3,9 +3,11 @@
 <head>
     <script src="js/angular.js"></script>
     <script src="https://cdn.firebase.com/v0/firebase.js"></script>
+    <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
     <script src="js/angularfire.js"></script>
     <script src="js/app.js"></script>
     <link rel="stylesheet" href="css/app.css"/>
+    <title>Code Review Board</title>
 </head>
 <body ng-controller="MainController">
 <div class="wrapper">
@@ -29,7 +31,7 @@
         </div>
         <div class="group">
             <label for="description">I need a review about</label>
-            <textarea id="description" ng-model="description" ng-keypress="addReviewItem($event)" placeholder="issue... " /></textarea>
+            <textarea id="description" ng-model="description" ng-keypress="addReviewItem($event)" placeholder="issue... "></textarea>
         </div>
         <button ng-click="addReviewItemClick()">Pin Request to Board</button>
     </form>

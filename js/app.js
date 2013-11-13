@@ -9,10 +9,12 @@ function MainController($scope, angularFire ){
     $scope.item = [];
     angularFire(ref, $scope, "item");
 
-//  Date
-    $scope.date = new Date();
+//  Get Date and Time through moment.js
+    $scope.date = moment().calendar();
+
 //  Coder is the user who post the review request
     $scope.coderName = '';
+
 //  Add
     $scope.addReviewItem = function(e){
         if(e.keyCode != 13) return;
@@ -59,7 +61,7 @@ function addNotify(user, description) {
         var notification = window.webkitNotifications.createNotification(
             'images/notification-new.png',
             user + ' needs code review',
-            'About '+ description
+            description
         );
 
         notification.onclick = function () {

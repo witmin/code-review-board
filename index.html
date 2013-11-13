@@ -6,6 +6,7 @@
     <script src="https://cdn.firebase.com/v0/firebase.js"></script>
     <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
     <script src="js/angularfire.js"></script>
+    <script src="js/moment.min.js"></script>
     <script src="js/app.js"></script>
     <!--CSS-->
     <link rel="stylesheet" href="css/app.css"/>
@@ -24,7 +25,7 @@
                 <a href="">Start Review</a>
                 <a class="delete" href="" ng-click="removeReviewItem()">Delete</a>
             </div>
-            <p class="created-time">Created On {{item.createdTime}}</p>
+            <p class="created-time">Created {{item.createdTime}}</p>
         </li>
     </ul>
     <form class="ask-for-review">

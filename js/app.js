@@ -23,7 +23,6 @@ function MainController($scope, angularFire ){
             createdTime : $scope.date,
             reviewer: ''
             });
-        pushAddNotify(ref);
         $scope.description = '';
     };
     $scope.addReviewItemClick = function(){
@@ -33,7 +32,6 @@ function MainController($scope, angularFire ){
             status: 'waiting',
             reviewer: ''
         });
-        pushAddNotify(ref);
         $scope.description = '';
     };
 
@@ -41,17 +39,18 @@ function MainController($scope, angularFire ){
     $scope.removeReviewItem = function(index){
         $scope.item.splice(index, 1);
     };
-}
 
+    pushAddNotify(ref);
+
+}
 //    Show Webkit Notification When new database comes in
 function pushAddNotify(db){
     db.on('child_added', function(snapshot){
-        var userName = snapshot.user;
-        var content = snapshot.description;
+        var userName = snapshot.val().user;
+        var content = snapshot.val().description;
         addNotify(userName, content);
     });
 }
-
 //Webkit Notification
 function addNotify(user, description) {
     var havePermission = window.webkitNotifications.checkPermission();

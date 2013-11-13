@@ -61,9 +61,11 @@ button:hover {
   padding: 10px 15px;
   background: #fff9ca; }
 
+.board li p {
+  margin: 3px 0 5px 0; }
+
 .status {
   font-size: 0.8em;
-  margin: 0;
   text-transform: capitalize;
   float: right; }
 
@@ -73,11 +75,16 @@ button:hover {
   padding: 3px 5px; }
 
 .coder {
-  font-weight: bold;
-  margin: 0; }
+  margin: 0;
+  font-weight: bold; }
 
 .description {
+  margin: 10px 0;
   line-height: 1.25; }
+
+.created-time {
+  font-size: .7em;
+  color: #999999; }
 
 .ask-for-review {
   width: 80%;

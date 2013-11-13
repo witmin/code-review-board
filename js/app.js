@@ -4,35 +4,36 @@
 var app = angular.module("codeReviewBoard", ["firebase"]);
 
 function MainController($scope, angularFire ){
-    var ref = new Firebase("https://code-review-firebase.firebaseio.com/");
+    var ref = new Firebase('https://code-review-firebase.firebaseio.com/');
 //  Set up review item
     $scope.item = [];
     angularFire(ref, $scope, "item");
 
 //  Date
     $scope.date = new Date();
-
+//  Coder is the user who post the review request
+    $scope.coderName = '';
 //  Add
     $scope.addReviewItem = function(e){
         if(e.keyCode != 13) return;
         $scope.item.push({
-            coderName: $scope.coderName,
+            user: $scope.coderName,
             description: $scope.description,
             status: 'waiting',
             createdTime : $scope.date,
             reviewer: ''
-            })
-        notify($scope.coderName, $scope.description);
+            });
+        pushAddNotify(ref);
         $scope.description = '';
     };
     $scope.addReviewItemClick = function(){
         $scope.item.push({
-            coderName: $scope.coderName,
+            user: $scope.coderName,
             description: $scope.description,
             status: 'waiting',
             reviewer: ''
-        })
-        notify($scope.coderName, $scope.description);
+        });
+        pushAddNotify(ref);
         $scope.description = '';
     };
 
@@ -42,19 +43,28 @@ function MainController($scope, angularFire ){
     };
 }
 
-//Webkit Notificatiion
-function notify(coderName, description) {
+//    Show Webkit Notification When new database comes in
+function pushAddNotify(db){
+    db.on('child_added', function(snapshot){
+        var userName = snapshot.user;
+        var content = snapshot.description;
+        addNotify(userName, content);
+    });
+}
+
+//Webkit Notification
+function addNotify(user, description) {
     var havePermission = window.webkitNotifications.checkPermission();
     if (havePermission == 0) {
         // 0 is PERMISSION_ALLOWED
         var notification = window.webkitNotifications.createNotification(
             'images/notification-new.png',
-            coderName + ' asks for Code Review',
+            user + ' needs code review',
             'About '+ description
         );
 
         notification.onclick = function () {
-            window.open("http://stackoverflow.com/a/13328397/1269037");
+            window.open("index.html");
             notification.close();
         }
         notification.show();

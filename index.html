@@ -17,13 +17,14 @@
     <ul class="board">
         <li ng-repeat="item in item" class="item">
             <p class="status {{item.status}}">{{item.status}}</p>
-            <p class="coder">{{item.coderName}}:</p>
+            <p class="coder">{{item.user}}:</p>
             <p class="description">{{item.description}}</p>
             <p class="reviewer">{{item.reviewer}}</p>
             <div class="actions">
                 <a href="">Start Review</a>
                 <a class="delete" href="" ng-click="removeReviewItem()">Delete</a>
             </div>
+            <p class="created-time">Created On {{item.createdTime}}</p>
         </li>
     </ul>
     <form class="ask-for-review">

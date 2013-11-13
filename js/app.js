@@ -23,6 +23,7 @@ function MainController($scope, angularFire ){
             createdTime : $scope.date,
             reviewer: ''
             });
+        pushAddNotify(ref);
         $scope.description = '';
     };
     $scope.addReviewItemClick = function(){
@@ -32,6 +33,7 @@ function MainController($scope, angularFire ){
             status: 'waiting',
             reviewer: ''
         });
+        pushAddNotify(ref);
         $scope.description = '';
     };
 
@@ -39,8 +41,6 @@ function MainController($scope, angularFire ){
     $scope.removeReviewItem = function(index){
         $scope.item.splice(index, 1);
     };
-
-    pushAddNotify(ref);
 
 }
 //    Show Webkit Notification When new database comes in

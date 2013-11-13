@@ -22,10 +22,28 @@
             <p class="description">{{item.description}}</p>
             <p class="reviewer">{{item.reviewer}}</p>
             <div class="actions">
-                <a href="">Start Review</a>
-                <a class="delete" href="" ng-click="removeReviewItem()">Delete</a>
+                <a class="start-review-btn" href="" ng-click="confirmReview.showThis = !confirmReview.showThis">Start Review</a>
+                <a class="delete" href="" ng-click="removeItem(item)">Delete</a>
             </div>
             <p class="created-time">Created {{item.createdTime}}</p>
+            <p>Reviewer: {{item.reviewer}}</p>
+            <!--Start Dialog for start review confirmation-->
+            <div class="dialog animate-show" id="start-review-dialog" ng-show="confirmReview.showThis" >
+                <div class="container">
+                    <div class="header">
+                        <h3>Confirm Review</h3>
+                    </div>
+                    <div class="content">
+                        <label for="revierwer-name">Please enter your name to start the review</label>
+                        <input id="revierwer-name" type="text" ng-model="reviewerName" />
+                    </div>
+                    <div class="footer">
+                        <a href="" class="primary-btn start-review-confirm-btn" ng-click="startReviewClick()">Start Review</a>
+                        <a href="" class="close">cancel</a>
+                    </div>
+
+                </div>
+            </div>
         </li>
     </ul>
     <form class="ask-for-review">
@@ -40,5 +58,7 @@
         <button ng-click="addReviewItemClick()">Pin Request to Board</button>
     </form>
 </div>
+
+
 </body>
 </html>

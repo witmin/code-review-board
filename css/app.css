@@ -1,5 +1,6 @@
 @import url(normalize.css);
 @import 'http://fonts.googleapis.com/css?family=Share:400,700';
+@import url(animations.css);
 body {
   font-family: 'Share', cursive;
   position: relative;
@@ -34,15 +35,15 @@ input, button, textarea {
 
 button {
   color: #62401b;
-  background: #e5ae38;
+  background: #ffd781;
   width: 520px;
   border: 0;
-  border-bottom: 2px solid #cba753; }
+  border-bottom: 2px solid #e8c475; }
 
 button:hover {
   color: #3a2610;
-  background: #d3b95c;
-  border-bottom-color: #cc8538; }
+  background: #ffde89;
+  border-bottom-color: #d2aa73; }
 
 .group {
   margin: 0 0 .5em 0; }
@@ -52,39 +53,32 @@ button:hover {
   list-style: none;
   padding: 0;
   margin: 0; }
-
-.board li {
-  float: left;
-  width: 280px;
-  min-height: 140px;
-  margin: 0 10px 10px 0;
-  padding: 10px 15px;
-  background: #fff9ca; }
-
-.board li p {
-  margin: 3px 0 5px 0; }
-
-.status {
-  font-size: 0.8em;
-  text-transform: capitalize;
-  float: right; }
-
-.status.waiting {
-  color: #ffffff;
-  background: #3691ff;
-  padding: 3px 5px; }
-
-.coder {
-  margin: 0;
-  font-weight: bold; }
-
-.description {
-  margin: 10px 0;
-  line-height: 1.25; }
-
-.created-time {
-  font-size: .7em;
-  color: #999999; }
+  .board li {
+    float: left;
+    width: 280px;
+    min-height: 140px;
+    margin: 0 10px 10px 0;
+    padding: 10px 15px;
+    background: #fff9ca; }
+    .board li p {
+      margin: 3px 0 5px 0; }
+    .board li .status {
+      font-size: 0.8em;
+      text-transform: capitalize;
+      float: right; }
+    .board li .status.waiting {
+      color: #ffffff;
+      background: #3691ff;
+      padding: 3px 5px; }
+    .board li .coder {
+      margin: 0;
+      font-weight: bold; }
+    .board li .description {
+      margin: 10px 0;
+      line-height: 1.25; }
+    .board li .created-time {
+      font-size: .7em;
+      color: #999999; }
 
 .ask-for-review {
   width: 80%;
@@ -95,3 +89,17 @@ button:hover {
   margin: 1em 0 0 0;
   border-top: 1px solid #eeeeee;
   background: #ffffff; }
+
+.dialog {
+  z-index: 100;
+  position: fixed;
+  top: 300px;
+  left: 5%;
+  border: 0; }
+  .dialog .container {
+    background: #ffffff;
+    border: 1px solid #cccccc;
+    box-shadow: 0 1px 3px 3px #dddddd;
+    padding: 5px 20px 30px 20px;
+    width: auto;
+    height: auto; }

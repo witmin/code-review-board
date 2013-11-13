@@ -14,6 +14,7 @@ function MainController($scope, angularFire ){
 
 //  Coder is the user who post the review request
     $scope.coderName = '';
+    $scope.reviewerName = '';
 
 //  Add
     $scope.addReviewItem = function(e){
@@ -23,7 +24,9 @@ function MainController($scope, angularFire ){
             description: $scope.description,
             status: 'waiting',
             createdTime : $scope.date,
-            reviewer: ''
+            reviewer: '',
+            startReviewTime: '',
+            endReviewTime:''
             });
         pushAddNotify(ref);
         $scope.description = '';
@@ -33,17 +36,28 @@ function MainController($scope, angularFire ){
             user: $scope.coderName,
             description: $scope.description,
             status: 'waiting',
-            reviewer: ''
+            reviewer: '',
+            startReviewTime: '',
+            endReviewTime:''
         });
         pushAddNotify(ref);
         $scope.description = '';
     };
 
-//Remove
-    $scope.removeReviewItem = function(index){
-        $scope.item.splice(index, 1);
+//  Remove
+    $scope.removeItem = function() {
+        $scope.item.splice($scope.toRemove, 1);
+        $scope.toRemove = null;
     };
 
+
+//  Click "Start Review" to add reviewer's name and to change status
+    $scope.startReviewClick = function(index){
+        ref.index.update({
+            reviewer: $scope.reviewerName,
+            status: 'under review'
+        });
+    };
 }
 //    Show Webkit Notification When new database comes in
 function pushAddNotify(db){

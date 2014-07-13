@@ -1,63 +1,64 @@
 <!DOCTYPE HTML>
-<html ng-app="codeReviewBoard" xmlns="http://www.w3.org/1999/html">
+<html ng-app="codeReviewBoard">
 <head>
     <!--Javascript Library-->
+    <script src="https://cdn.firebase.com/js/client/1.0.17/firebase.js"></script>
     <script src="js/angular.min.js"></script>
-    <script src="https://cdn.firebase.com/v0/firebase.js"></script>
-    <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
-    <script src="js/angularfire.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js"></script>
     <script src="js/moment.min.js"></script>
     <script src="js/app.js"></script>
     <!--CSS-->
     <link rel="stylesheet" href="css/app.css"/>
     <title>Code Review Board</title>
 </head>
-<body ng-controller="MainController">
+<body ng-controller="ReviewController as reviewCtrl">
 <div class="wrapper">
     <h1>Code Review Board</h1>
     <ul class="board">
-        <li ng-repeat="item in item" class="item">
-            <p class="status {{item.status}}">{{item.status}}</p>
-            <p class="coder">{{item.user}}:</p>
-            <p class="description">{{item.description}}</p>
-            <p class="reviewer">{{item.reviewer}}</p>
+        <li ng-repeat="review in reviewCtrl.reviews" class="item">
+            <p class="status {{review.status}}">{{review.status}}</p>
+            <p class="coder">{{review.user}}:</p>
+            <p class="created-time">{{review.createdTime}}</p>
+            <p class="description">{{review.description}}</p>
+            <p class="reviewer">Reviewer: {{review.reviewer}}</p>
             <div class="actions">
-                <a class="start-review-btn" href="" ng-click="confirmReview.showThis = !confirmReview.showThis">Start Review</a>
-                <a class="delete" href="" ng-click="removeItem(item)">Delete</a>
+                <a class="start-review-btn" href="" ng-click="reviewerDialog.show = true">Start Review</a>
+                <a class="delete" href="" ng-click="reviewCtrl.removeReview(review)">Delete</a>
             </div>
-            <p class="created-time">Created {{item.createdTime}}</p>
-            <p>Reviewer: {{item.reviewer}}</p>
 
             <!--Start Dialog for start review confirmation-->
-            <div class="dialog animate-show" id="start-review-dialog" ng-show="confirmReview.showThis" >
-                <div class="container">
-                    <div class="header">
-                        <h3>Start Review</h3>
-                    </div>
-                    <div class="content">
-                        <label for="revierwer-name">Enter your name to continue</label>
-                        <input id="revierwer-name" type="text" ng-model="reviewerName" />
-                    </div>
-                    <div class="footer">
-                        <button class="btn primary-btn start-review-confirm-btn" ng-click="startReviewClick()">Continue</button>
-                        <a href="" class="close" ng-click="confirmReview.showThis = !confirmReview.showThis">cancel</a>
-                    </div>
+            <form name="reviewrForm" ng-controller="ReviewerController as reviewerCtrl" ng-submit="reviewerCtrl.addReviewer()" novalidate>
+                <div class="dialog animate-show" id="start-review-dialog" ng-show="reviewerDialog.show" >
+                    <div class="container">
+                        <div class="header">
+                            <h3>Start Review</h3>
+                        </div>
+                        <div class="content">
+                            <label for="reviewer-name">Enter your name to continue</label>
+                            <input id="reviewer-name" type="text" ng-model="reviewerCtrl.reviewer.reviewerName" />
+                        </div>
+                        <div class="footer">
+                            <button class="btn primary-btn start-review-confirm-btn" type="submit" ng-click="reviewerDialog.show = false" >Continue</button>
+                            <a href="" class="close" ng-click="reviewerDialog.show = false">cancel</a>
+                        </div>
 
+                    </div>
                 </div>
-            </div>
+            </form>
 
         </li>
     </ul>
-    <form class="ask-for-review">
+
+    <form class="ask-for-review" name="submitForm" ng-controller="RequestController as requestCtrl" ng-submit="requestCtrl.addRequest()" novalidate>
         <div class="group">
             <label for="coder-name">My name is</label>
-            <input id="coder-name" type="text" ng-model="coderName" placeholder=""/>
+            <input id="coder-name" type="text" ng-model="requestCtrl.review.user" placeholder="" required />
         </div>
         <div class="group">
             <label for="description">I need a review about</label>
-            <textarea id="description" ng-model="description" ng-keypress="addReviewItem($event)" placeholder="issue... "></textarea>
+            <textarea id="description" ng-model="requestCtrl.review.description" placeholder="issue... " required></textarea>
         </div>
-        <button class="btn primary-btn" ng-click="addReviewItemClick()">Pin Request to Board</button>
+        <button class="btn primary-btn" type="submit">Pin Request to Board</button>
     </form>
 </div>
 

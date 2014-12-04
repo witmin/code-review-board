@@ -5,74 +5,51 @@
 (function(){
     var app = angular.module("codeReviewBoard", ["firebase"]);
 
-    var ref = new Firebase('https://code-review-firebase.firebaseio.com/reviews');
+    app.controller("ReviewController", ["$scope", "$firebase",
+        function($scope, $firebase){
+            var ref = new Firebase('https://code-review-firebase.firebaseio.com/reviews');
 
-    
-    app.controller("ReviewController", function($firebase){
-        this.reviews = [];
-        this.reviews = $firebase(ref);
-        this.removeReview = function(){
-            ref.remove();
-        };
+            // create an AngularFire reference to the data
+            var sync = $firebase(ref);
 
-    //    this.startReviewClick = startReviewClick;
-    });
+            // download the data into a local object
+            $scope.reviews = sync.$asArray();
 
-    app.controller("RequestController", function(){
-        // Get Date and Time through moment.js
-        var date = moment().calendar();
-        this.review = {};
-        this.review = {
-            'status': 'waiting',
-            'createdTime': date,
-            'reviewer': '(To be confirmed)',
-            'startReviewTime': ' ',
-            'endReviewTime': ' '
-        };
-        this.addRequest= function(){
-            ref.push(this.review);
-            this.review = {};
-        };
-    });
+            // Add Review Request
+            $scope.addReviewRequest = function(requester, desc) {
+                var createdOn = moment().calendar();
+                $scope.reviews.$add({
+                    description: desc,
+                    requester: requester,
+                    createdTime: createdOn,
+                    status: 'waiting',
+                    reviewer: '(To be claimed)',
+                    'startReviewTime': ' ',
+                    'endReviewTime': ' '
+                });
+            };
+
+    }]);
 
     app.controller("ReviewerController", function () {
         var date = moment().calendar();
         this.reviewer = {};
-        this.addReviewer= function(){
-            ref.child().set({
-                "reviewerName": this.reviewer.reviewerName,
-                "startReviewTime": date
+        this.addReviewer= function(e){
+            var keys = e.reviews.$getIndex();
+            keys.forEach(function(key, i){
+                console.log(i, e.items[key]);
+                ref.key.$update({
+                    "reviewerName" : this.reviewer.reviewerName,
+                    "startReviewTime" : date
+                });
             });
+
             this.reviewer = {};
         };
     });
-    
+
     // Show/hide Reviewer Dialog
-    var reviewerDialog = {
-        'show': false
-    }
-
-    //  Add
-    var addReviewItem = function(e){
-        if(e.keyCode != 13) return;
-        reviews.push({
-            user: $scope.coderName,
-            description: $scope.description,
-            status: 'waiting',
-            createdTime : new date(),
-            reviewer: '',
-            startReviewTime: '',
-            endReviewTime:''
-        });
-        pushAddNotify(reviews);
-//        description = '';
-    };
-
-    //  Remove
-    var removeItem = function() {
-        reviews.splice(this.toRemove, 1);
-        this.toRemove = null;
-    };
+    var reviewerDialog = {'show': false};
 
     //    Show Webkit Notification When new database comes in
     function pushAddNotify(db){
@@ -103,4 +80,4 @@
             window.webkitNotifications.requestPermission();
         }
     }
-})()
+})();
